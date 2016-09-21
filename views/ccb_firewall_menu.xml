@@ -15,8 +15,16 @@
         <menuitem id="main_fw_automatic_menu" name="fw_automatic" string="防火墙自动化"/>
         <!-- A first level in the left side menu is needed before using action= attribute -->
         <menuitem id="needs" name="needs" parent="main_fw_automatic_menu" />
+
         <!-- A second level in the left side menu is needed before using action= attribute -->
+        <record model="ir.actions.act_url" id="fw_search_action">
+            <field name="name">需求搜索</field>
+            <field name="url">ccb_firewall/needs</field>
+            <field name="target" >new</field>
+        </record>
+        <menuitem id="needs_search_menu" name="needs search"  parent="needs" action="fw_search_action"/>
         <menuitem id="needs_list_menu" name="needs List"  parent="needs" action="fw_automatic_needs_action"/>
+
 
     </data>
 </openerp>

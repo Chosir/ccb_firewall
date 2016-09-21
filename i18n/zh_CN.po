@@ -35,6 +35,11 @@ msgstr "需求"
 msgid "needs_list_menu"
 msgstr "需求列表"
 
+#. module: ccb_firewall
+#: model:ir.ui.menu,name:ccb_firewall.needs_search_menu
+msgid "needs_search_menu"
+msgstr "搜索"
+
 
 
 

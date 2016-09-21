@@ -22,7 +22,7 @@ class CcbFirewall(http.Controller):
             else:
                 for obj in objs:
                     if obj.dst_ip.strip().find('.') < 0:
-                        break
+                        continue
                     if obj.dst_ip.strip().find('\r\n') >= 0:
                         dsts = obj.dst_ip.strip().split('\r\n')
                     elif obj.dst_ip.strip().find('\n') >= 0 :
@@ -47,7 +47,7 @@ class CcbFirewall(http.Controller):
             if dst_ip.lower() == "any":
                 for obj in objs:
                     if obj.source_ip.strip().find('.') < 0:
-                        break
+                        continue
                     if obj.source_ip.strip().find('\r\n') >= 0:
                         srcs = obj.source_ip.strip().split('\r\n')
                     elif obj.source_ip.strip().find('\n') >= 0:
@@ -59,9 +59,9 @@ class CcbFirewall(http.Controller):
                     if obj.source_ip.strip() == "any":
                         objects.append(obj)
                     else:
+
                         for src in srcs:
                             src = src.strip()
-                            print src,src_ip
                             if IP(src_ip) in IP(src):
                                 objects.append(obj)
                                 break
@@ -72,7 +72,7 @@ class CcbFirewall(http.Controller):
             else:
                 for obj in objs:
                     if obj.source_ip.strip().find('.') < 0 or obj.dst_ip.strip().find('.') < 0:
-                        break
+                        continue
                     if obj.source_ip.strip().find('\r\n') >= 0:
                         srcs = obj.source_ip.strip().split('\r\n')
                     elif obj.source_ip.strip().find('\n') >= 0:
@@ -96,6 +96,7 @@ class CcbFirewall(http.Controller):
                         for src in srcs:
                             src = src.strip()
                             if obj.dst_ip.strip() == "any":
+
                                 if IP(src_ip) in IP(src):
                                     objects.append(obj)
                                     break

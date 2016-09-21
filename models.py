@@ -13,9 +13,8 @@ class needs(models.Model):
     control_points1 = fields.Char(string="访问控制点1")
     control_points2 = fields.Char(string="访问控制点2")
     control_points3 = fields.Char(string="访问控制点3")
+    active = fields.Boolean(string="有效",default=True)
 
-    @api.multi
-    def get_fw(self,source_ip,dst_ip):
-        pass
+
 
 

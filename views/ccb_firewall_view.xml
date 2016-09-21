@@ -24,6 +24,7 @@
                         <group >
                             <field name="control_points1" />
                             <field name="control_points2" />
+                            <field name="control_points3" />
                         </group>
                     </group>
                 </form>
@@ -41,6 +42,7 @@
                     <field name="dst_ip" />
                     <field name="control_points1" />
                     <field name="control_points2" />
+                    <field name="control_points3" />
                 </tree>
             </field>
         </record>
@@ -50,10 +52,15 @@
             <field name="arch" type="xml">
                 <search string="Search">
                     <field name="name" />
-                        <!--<filter string="自己的合同" name="my" domain="[('header_id', '=',uid)]"/>-->
+                        <filter string="无效" name="active" domain="[('active', '=',False)]"/>-->
                     <separator/>
                     <group expand="0" string="分组">
                         <filter string="名称" name="name" context="{'group_by':'name'}"/>
+                        <filter string="源区域" name="source_areas" context="{'group_by':'source_areas'}"/>
+                        <filter string="目的区域" name="dst_areas" context="{'group_by':'dst_areas'}"/>
+                        <filter string="控制点1" name="control_points1" context="{'group_by':'control_points1'}"/>
+                        <filter string="控制点2" name="control_points2" context="{'group_by':'control_points2'}"/>
+                        <filter string="控制点3" name="control_points3" context="{'group_by':'control_points3'}"/>
                     </group>
                 </search>
             </field>
