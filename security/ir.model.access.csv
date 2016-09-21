@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ccb_firewall_needs,ccb_firewall.needs,model_ccb_firewall_needs,,1,1,1,1

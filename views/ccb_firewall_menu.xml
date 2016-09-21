@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.actions.act_window" id="fw_automatic_needs_action">
+            <field name="name">需求单</field>
+            <field name="res_model">ccb_firewall.needs</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">创建新的需求单
+                </p>
+            </field>
+        </record>
+        <!-- top level menu: no parent -->
+        <menuitem id="main_fw_automatic_menu" name="fw_automatic" string="防火墙自动化"/>
+        <!-- A first level in the left side menu is needed before using action= attribute -->
+        <menuitem id="needs" name="needs" parent="main_fw_automatic_menu" />
+        <!-- A second level in the left side menu is needed before using action= attribute -->
+        <menuitem id="needs_list_menu" name="needs List"  parent="needs" action="fw_automatic_needs_action"/>
+
+    </data>
+</openerp>

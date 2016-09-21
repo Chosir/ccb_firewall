@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="ccb_need_view">
+            <field name="name">需求</field>
+            <field name="model">ccb_firewall.needs</field>
+            <field name="arch" type="xml">
+                <form string="ccb_firewall_needs" >
+                    <!--<header>-->
+                        <!--<button name="copy_all"  string="续签" type="object" states="renew" class="oe_highlight" />-->
+                        <!--<button name="going"  string="进行中" states="going" class="oe_highlight" invisible="True"/>-->
+                        <!--<button name="renew"  string="待续签" states="renew" class="oe_highlight" invisible="True"/>-->
+                        <!--<button name="set_off" string="关闭" states="renew" type='object' class="oe_highlight" />-->
+                        <!--<field name="state" widget="statusbar"/>-->
+                    <!--</header>-->
+                     <group>
+                        <group>
+                            <field name="name" />
+                            <field name="source_areas"/>
+                            <field name="source_ip" />
+                            <field name="dst_areas" />
+                            <field name="dst_ip" />
+                        </group>
+                        <group >
+                            <field name="control_points1" />
+                            <field name="control_points2" />
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="ccb_need_tree">
+            <field name="name">需求列表</field>
+            <field name="model">ccb_firewall.needs</field>
+            <field name="arch" type="xml">
+                <tree string="ccb_firewall__tree" >
+                    <field name="name" />
+                    <field name="source_areas"/>
+                    <field name="source_ip" />
+                    <field name="dst_areas" />
+                    <field name="dst_ip" />
+                    <field name="control_points1" />
+                    <field name="control_points2" />
+                </tree>
+            </field>
+        </record>
+        <record id="ccb_need_filter" model="ir.ui.view">
+            <field name="name">ccb_need_search</field>
+            <field name="model">ccb_firewall.needs</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name" />
+                        <!--<filter string="自己的合同" name="my" domain="[('header_id', '=',uid)]"/>-->
+                    <separator/>
+                    <group expand="0" string="分组">
+                        <filter string="名称" name="name" context="{'group_by':'name'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+    </data>
+</openerp>
