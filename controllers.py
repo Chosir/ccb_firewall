@@ -17,7 +17,7 @@ class CcbFirewall(http.Controller):
             if dst_ip.lower() == "any":
                 return http.request.render('ccb_firewall.listing', {
                     'root': '/ccb_firewall/needs',
-                    'objects': http.request.env['ccb_firewall.needs'].search([]),
+                    'objects': http.request.env['ccb_firewall.needs'].search([]).ids,
                     })
             else:
                 for obj in objs:
@@ -32,12 +32,12 @@ class CcbFirewall(http.Controller):
                     else:
                         dsts = obj.dst_ip.strip().split(' ')
                     if obj.dst_ip.strip() == "any":
-                        objects.append(obj)
+                        objects.append(obj.id)
                     else:
                         for dst in dsts:
                             dst = dst.strip()
                             if IP(dst_ip) in IP(dst):
-                                objects.append(obj)
+                                objects.append(obj.id)
                                 break
                 return http.request.render('ccb_firewall.listing', {
                     'root': '/ccb_firewall/needs',
@@ -57,13 +57,13 @@ class CcbFirewall(http.Controller):
                     else:
                         srcs = obj.source_ip.strip().split(' ')
                     if obj.source_ip.strip() == "any":
-                        objects.append(obj)
+                        objects.append(obj.id)
                     else:
 
                         for src in srcs:
                             src = src.strip()
                             if IP(src_ip) in IP(src):
-                                objects.append(obj)
+                                objects.append(obj.id)
                                 break
                 return http.request.render('ccb_firewall.listing', {
                     'root': '/ccb_firewall/needs',
@@ -91,20 +91,20 @@ class CcbFirewall(http.Controller):
                     else:
                         dsts = obj.dst_ip.strip().split(' ')
                     if obj.dst_ip.strip() == "any" and obj.source_ip.strip() == "any":
-                        objects.append(obj)
+                        objects.append(obj.id)
                     else:
                         for src in srcs:
                             src = src.strip()
                             if obj.dst_ip.strip() == "any":
 
                                 if IP(src_ip) in IP(src):
-                                    objects.append(obj)
+                                    objects.append(obj.id)
                                     break
                             elif src == "any":
                                 for dst in dsts:
                                     dst = dst.strip()
                                     if IP(dst_ip) in IP(dst):
-                                        objects.append(obj)
+                                        objects.append(obj.id)
                                         break
                                 else:
                                     continue
@@ -113,7 +113,7 @@ class CcbFirewall(http.Controller):
                                 for dst in dsts:
                                     dst = dst.strip()
                                     if IP(src_ip) in IP(src) and IP(dst_ip) in IP(dst):
-                                        objects.append(obj)
+                                        objects.append(obj.id)
                                         break
                                 else:
                                     continue
@@ -124,8 +124,8 @@ class CcbFirewall(http.Controller):
                 })
 
 
-    @http.route('/ccb_firewall/needs/objects/<model("ccb_firewall.needs"):obj>/', auth='public')
-    def object(self, obj, **kw):
-        return http.request.render('ccb_firewall.object', {
-            'object': obj
-        })
+    # @http.route('/ccb_firewall/needs/objects/<model("ccb_firewall.needs"):obj>/', auth='public')
+    # def object(self, obj, **kw):
+    #     return http.request.render('ccb_firewall.object', {
+    #         'object': obj
+    #     })

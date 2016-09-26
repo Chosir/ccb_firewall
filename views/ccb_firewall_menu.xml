@@ -22,8 +22,8 @@
             <field name="url">ccb_firewall/needs</field>
             <field name="target" >new</field>
         </record>
-        <menuitem id="needs_search_menu" name="needs search"  parent="needs" action="fw_search_action"/>
-        <menuitem id="needs_list_menu" name="needs List"  parent="needs" action="fw_automatic_needs_action"/>
+        <menuitem id="needs_search_menu" name="needs search" sequence="5" parent="needs" action="fw_search_action"/>
+        <menuitem id="needs_list_menu" name="needs List"  sequence="10" parent="needs" action="fw_automatic_needs_action"/>
 
 
     </data>

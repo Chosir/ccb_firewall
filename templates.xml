@@ -13,12 +13,13 @@
            <ul>
                <t t-if="objects">
              <li t-foreach="objects" t-as="object">
-               <a t-attf-href="#{ root }/objects/#{ object.id }">
-                   <t t-esc="object.display_name"/>
-                   <t t-esc="object.control_points1"/>
-                   <t t-esc="object.control_points2"/>
-                   <t t-esc="object.control_points3"/>
-               </a>
+               <!--<a t-attf-href="#{ root }/objects/#{ object.id }">-->
+                   <!--<t t-esc="object.display_name"/>-->
+                   <!--<t t-esc="object.control_points1"/>-->
+                   <!--<t t-esc="object.control_points2"/>-->
+                   <!--<t t-esc="object.control_points3"/>-->
+               <!--</a>-->
+                 <t t-esc="object"/>
              </li>
             </t>
                <t t-if="not objects">

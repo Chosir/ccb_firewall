@@ -20,6 +20,7 @@
                             <field name="source_ip" />
                             <field name="dst_areas" />
                             <field name="dst_ip" />
+                            <field name="active" />
                         </group>
                         <group >
                             <field name="control_points1" />
@@ -43,6 +44,7 @@
                     <field name="control_points1" />
                     <field name="control_points2" />
                     <field name="control_points3" />
+                    <field name="active" />
                 </tree>
             </field>
         </record>

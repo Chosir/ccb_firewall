@@ -10,9 +10,9 @@ class needs(models.Model):
     dst_areas = fields.Char(string="目的区域")
     source_ip = fields.Text(string="源IP")
     dst_ip = fields.Text(string="目的IP")
-    control_points1 = fields.Char(string="访问控制点1")
-    control_points2 = fields.Char(string="访问控制点2")
-    control_points3 = fields.Char(string="访问控制点3")
+    control_points1 = fields.Text(string="访问控制点1")
+    control_points2 = fields.Text(string="访问控制点2")
+    control_points3 = fields.Text(string="访问控制点3")
     active = fields.Boolean(string="有效",default=True)
 
 
