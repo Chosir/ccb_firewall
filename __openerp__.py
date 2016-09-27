@@ -28,10 +28,14 @@
         'views/ccb_firewall_view.xml',
         'views/ccb_firewall_menu.xml',
         'templates.xml',
+        'views/ccb_firewall_link.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
         'demo.xml',
     ],
     'application':True,
+    'qweb':[
+        'static/src/xml/firewall.xml',
+    ],
 }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <template id="assets_backend"  name="ccb_firewall assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" type="text/css" href="/ccb_firewall/static/src/css/firewall.css"/>
+                <script type="text/javascript" charset="utf-8" src="/ccb_firewall/static/src/js/firewall.js"></script>
+            </xpath>
+        </template>
+    </data>
+</openerp>
