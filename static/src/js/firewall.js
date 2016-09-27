@@ -8,8 +8,9 @@ openerp.ccb_firewall=function(instance){
         QWeb=instance.web.qweb;
     instance.ccb_firewall={};
 
-    instance.ccb_firewall.HomePage=instance.web.Widget.extend({
-        init:function(){
+    instance.ccb_firewall.need=instance.web.Widget.extend({
+        init:function(parent){
+            this._super(parent);
             console.log('abc');
         },
         start:function(){
@@ -17,6 +18,5 @@ openerp.ccb_firewall=function(instance){
         }
     });
 
-    instance.web.client_actions.add('firewall.homepage','instance.ccb_firewall.HomePage');
-
+    instance.web.client_actions.add('ccb_firewall.needs','instance.ccb_firewall.need');
 }

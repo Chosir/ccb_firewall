@@ -17,10 +17,9 @@
         <menuitem id="needs" name="needs" parent="main_fw_automatic_menu" />
 
         <!-- A second level in the left side menu is needed before using action= attribute -->
-        <record model="ir.actions.act_url" id="fw_search_action">
+        <record model="ir.actions.client" id="fw_search_action">
             <field name="name">需求搜索</field>
-            <field name="url">ccb_firewall/needs</field>
-            <field name="target" >new</field>
+            <field name="tag">ccb_firewall.needs</field>
         </record>
         <menuitem id="needs_search_menu" name="needs search" sequence="10" parent="needs" action="fw_search_action"/>
         <menuitem id="needs_list_menu" name="needs List"  sequence="5" parent="needs" action="fw_automatic_needs_action"/>
