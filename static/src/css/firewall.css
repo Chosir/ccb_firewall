@@ -1,1 +1,7 @@
 @charset "UTF-8";
+@media (min-width: 768px) {
+  body .oe_list_buttons button.need-search {
+    margin-left: 150px;
+    width: 120px;
+  }
+}

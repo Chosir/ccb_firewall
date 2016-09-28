@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates>
-
+    <t t-name="needSearch">
+        <div>
+            <form  action="/ccb_firewall/needs/objects/" method="post">
+                <label>源IP</label>
+                <input name="source_ip"/><br/>
+                <label>目的IP</label>
+                <input name="dst_ip"/><br/>
+                <input type="submit" value="提交"/>
+            </form>
+        </div>
+    </t>
 </templates>
