@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates>
     <t t-name="needSearch">
-        <div>
-            <form  action="/ccb_firewall/needs/objects/" method="post">
-                <label>源IP</label>
-                <input name="source_ip"/><br/>
-                <label>目的IP</label>
-                <input name="dst_ip"/><br/>
-                <input type="submit" value="提交"/>
+        <div class="needSearch">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">源IP</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="source_ip" placeholder="例如:192.168.1.1" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-2 control-label">目的IP</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="dst_ip" placeholder="例如:192.168.121.1" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-9">
+                        <button type="button" class="btn btn-block">搜索</button>
+                    </div>
+                </div>
             </form>
         </div>
     </t>

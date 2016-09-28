@@ -1,7 +1,6 @@
 /**
  * Created by Administrator on 2016-09-27.
  */
-console.log('模块开始加载');
 openerp.ccb_firewall=function(instance){
     var _t=instance.web._t,
         _lt=instance.web._lt,
@@ -48,7 +47,16 @@ openerp.ccb_firewall=function(instance){
             var $help = $(QWeb.render("needSearch", {
 
             }));
-            new instance.web.Dialog(null,{
+            $help.find('button.btn-block').click(function(e) {
+                    e.preventDefault();
+                    var tem=$help.find("form").serialize();
+                    $.post("/ccb_firewall/needs/objects/", tem, function(data){
+                        console.log(data);
+                        $dialog.close();
+                    });
+                }
+            );
+            var $dialog=new instance.web.Dialog(null,{
                 size: 'medium',
                 dialogClass: 'oe_act_window',
                 title: _t("需求搜索")
@@ -58,15 +66,6 @@ openerp.ccb_firewall=function(instance){
 
         }
     });
-    //弹出框
-    instance.ccb_firewall.dialog=instance.web.Dialog.extend({
-        init:function(_name){
-            this.name=_name;
-        },
-        start:function(){
-
-        }
-    })
 
     instance.ccb_firewall.widget=new instance.ccb_firewall.Widget();
 }
