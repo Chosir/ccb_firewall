@@ -2,6 +2,7 @@
 from openerp import http
 from IPy import IP
 import os,re
+import json
 class CcbFirewall(http.Controller):
     @http.route('/ccb_firewall/needs/', auth='public')
     def index(self, **kw):
@@ -15,10 +16,11 @@ class CcbFirewall(http.Controller):
         objs = http.request.env['ccb_firewall.needs'].search([])
         if src_ip.lower() == "any":
             if dst_ip.lower() == "any":
-                return http.request.render('ccb_firewall.listing', {
-                    'root': '/ccb_firewall/needs',
-                    'objects': http.request.env['ccb_firewall.needs'].search([]).ids,
-                    })
+                #return http.request.render('ccb_firewall.listing', {
+                    #'root': '/ccb_firewall/needs',
+                    #'objects': http.request.env['ccb_firewall.needs'].search([]).ids,
+                #})
+                return repr(http.request.env['ccb_firewall.needs'].search([]).ids)
             else:
                 for obj in objs:
                     if obj.dst_ip.strip().find('.') < 0:
@@ -39,10 +41,11 @@ class CcbFirewall(http.Controller):
                             if IP(dst_ip) in IP(dst):
                                 objects.append(obj.id)
                                 break
-                return http.request.render('ccb_firewall.listing', {
-                    'root': '/ccb_firewall/needs',
-                    'objects': objects,
-                })
+                #return http.request.render('ccb_firewall.listing', {
+                    #'root': '/ccb_firewall/needs',
+                    #'objects': objects,
+                #})
+                return repr(objects)
         else:
             if dst_ip.lower() == "any":
                 for obj in objs:
@@ -65,10 +68,11 @@ class CcbFirewall(http.Controller):
                             if IP(src_ip) in IP(src):
                                 objects.append(obj.id)
                                 break
-                return http.request.render('ccb_firewall.listing', {
-                    'root': '/ccb_firewall/needs',
-                    'objects': objects,
-                })
+                #return http.request.render('ccb_firewall.listing', {
+                    #'root': '/ccb_firewall/needs',
+                    #'objects': objects,
+                #})
+                return repr(objects)
             else:
                 for obj in objs:
                     if obj.source_ip.strip().find('.') < 0 or obj.dst_ip.strip().find('.') < 0:
@@ -118,10 +122,11 @@ class CcbFirewall(http.Controller):
                                 else:
                                     continue
                                 break
-                return http.request.render('ccb_firewall.listing', {
-                        'root': '/ccb_firewall/needs',
-                        'objects': objects,
-                })
+                #return http.request.render('ccb_firewall.listing', {
+                        #'root': '/ccb_firewall/needs',
+                        #'objects': objects,
+                #})
+                return repr(objects)
 
 
     # @http.route('/ccb_firewall/needs/objects/<model("ccb_firewall.needs"):obj>/', auth='public')

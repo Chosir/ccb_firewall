@@ -14,3 +14,6 @@ body div.needSearch button.btn {
   font-size: 14px;
   font-weight: bold;
 }
+body div.needSearch span.help-block {
+  margin-bottom: 0px;
+}
