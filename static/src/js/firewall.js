@@ -64,22 +64,24 @@ openerp.ccb_firewall=function(instance){
             })
             $help.find('button.btn-block').click(function(e) {
                     e.preventDefault();
-                    var tem=$help.find("form").serialize();
-                    if(o.source_ip && o.dst_ip){
-                        $.post("/ccb_firewall/needs/objects/", tem, doResponse,"json");
-                    }
+                    doRequest();
                 }
             );
             //按回车键提交表单
             $help.find("form").keydown(function(e){
                 if(e.keyCode==13){
                     $help.find('input').trigger("blur");
-                    var tem=$help.find("form").serialize();
-                    if(o.source_ip && o.dst_ip){
-                        $.post("/ccb_firewall/needs/objects/", tem, doResponse,"json");
-                    }
+                    doRequest();
                 }
             });
+            //提交请求
+            function doRequest(){
+                var tem=$help.find("form").serialize();
+                if(o.source_ip && o.dst_ip){
+                    instance.web.blockUI();
+                    $.post("/ccb_firewall/needs/objects/", tem, doResponse,"json");
+                }
+            }
             //利用正则表达式校验ip地址
             function vliIpv4(ip){
                 var reg=/^(2[5][0-5]|2[0-4]\d|1\d{2}|\d{1,2})\.(25[0-5]|2[0-4]\d|1\d{2}|\d{1,2})\.(25[0-5]|2[0-4]\d|1\d{2}|\d{1,2})\.(25[0-5]|2[0-4]\d|1\d{2}|\d{1,2})$/;
@@ -111,6 +113,7 @@ openerp.ccb_firewall=function(instance){
                     $("form li:eq("+i+") .searchview_extended_prop_op").val("=");
                     $("form li:eq("+i+") .searchview_extended_prop_value>input.field_integer").val(arr[i]);
                 }
+                instance.web.unblockUI();
                 if(length>0){
                     $("form button.oe_apply:first").trigger("submit");
                     $dialog.close();
