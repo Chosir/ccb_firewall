@@ -46,17 +46,18 @@ openerp.ccb_firewall=function(instance){
         },
         popDialog:function(){
             //用来存储表单插件的校验状态
-            var o={};
+            var o={source_ip:[],dst_ip:[]};
             var $help = $(QWeb.render("needSearch", {}));
             $help.find('input').blur(function(){
                 var ip=$(this).val();
                 var inputName=$(this).attr("name");
+                o[inputName][1]=ip.toLowerCase();
                 if(vliIpv4(ip)){
-                    o[inputName]=true;
+                    o[inputName][0]=true;
                     $(this).parents("div.form-group").removeClass("has-error").
                         children("span.help-block").html("")
                 }else{
-                    o[inputName]=false;
+                    o[inputName][0]=false;
                     $(this).parents("div.form-group").addClass("has-error").
                         children("span.help-block").
                         html("您输入的"+(inputName=="source_ip"?"“源":"“目的")+"IP”格式存在问题，请重新输入！");
@@ -77,15 +78,28 @@ openerp.ccb_firewall=function(instance){
             //提交请求
             function doRequest(){
                 var tem=$help.find("form").serialize();
-                if(o.source_ip && o.dst_ip){
-                    instance.web.blockUI();
-                    $.post("/ccb_firewall/needs/objects/", tem, doResponse,"json");
+                if(o.source_ip[0] && o.dst_ip[0]){
+                    if((o.source_ip[1]=="any") && (o.dst_ip[1]=="any")){
+                        $dialog.close();
+                        setTimeout(function(){
+                            //删除相关的已选择的选项标签
+                            $("span.oe_facet_values>span.oe_facet_value").each(function (i,span) {
+                                var html=$(span).html().trim();
+                                if(html.indexOf("ID")===0){
+                                    $(this).parent("span").siblings("span.oe_facet_remove").trigger("click");
+                                }
+                            });
+                        },100)
+                    }else{
+                        instance.web.blockUI();
+                        $.post("/ccb_firewall/needs/objects/", tem, doResponse,"json");
+                    }
                 }
             }
             //利用正则表达式校验ip地址
             function vliIpv4(ip){
                 var reg=/^(2[5][0-5]|2[0-4]\d|1\d{2}|\d{1,2})\.(25[0-5]|2[0-4]\d|1\d{2}|\d{1,2})\.(25[0-5]|2[0-4]\d|1\d{2}|\d{1,2})\.(25[0-5]|2[0-4]\d|1\d{2}|\d{1,2})$/;
-                ip=ip.toLowerCase()
+                ip=ip.toLowerCase();
                 if(ip=="any"||reg.test(ip)){
                     return true;
                 }else{
