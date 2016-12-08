@@ -9,25 +9,12 @@ openerp.ccb_firewall=function(instance){
 
     instance.ccb_firewall.Widget=instance.web.Widget.extend({
         init:function(){
-            var self=this;
-            var timer=setInterval(function(){
-                var action_manager=instance.client.action_manager;
-                if(action_manager){
-                    var inner_action=action_manager.inner_action;
-                    if(inner_action){
-                        var display_name=inner_action.display_name;
-                        if(display_name){
-                            clearInterval(timer);
-                            self.addBtn(display_name)
-                            watch(action_manager,"inner_action",function(pro,action,newVal,oldVal){
-                                self.addBtn(newVal.display_name);
-                            });
-                        }
-                    }
-                }
-            },100)
+        //暂时不需要
         },
-        //
+        start:function(o){
+            var displayName=o.client.action_manager.inner_action.display_name;
+            this.addBtn(displayName);
+        },
         addBtn:function(display_name){
             var self=this;
             if(display_name=="需求单"){
@@ -140,11 +127,9 @@ openerp.ccb_firewall=function(instance){
                 dialogClass: 'oe_act_window',
                 title: _t("需求搜索")
             },$help).open();
-        },
-        start:function(){
-        //暂时不需要
         }
     });
 
-    instance.ccb_firewall.widget=new instance.ccb_firewall.Widget();
+    //当视图加载时调用自己指定代码
+    instance.web.actionList.push(new instance.ccb_firewall.Widget());
 }

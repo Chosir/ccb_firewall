@@ -6,7 +6,9 @@ import json
 class CcbFirewall(http.Controller):
     @http.route('/ccb_firewall/needs/', auth='public')
     def index(self, **kw):
-        return http.request.render('ccb_firewall.search')
+        print http.request.httprequest.remote_addr
+        return http.request.httprequest.remote_addr
+        #return http.request.render('ccb_firewall.search')
 
     @http.route('/ccb_firewall/needs/objects/', type='http', auth="public", methods=['POST'])
     def list(self, **post):
