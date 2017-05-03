@@ -11,25 +11,22 @@ openerp.ccb_firewall=function(instance){
         init:function(){
         //暂时不需要
         },
-        start:function(o){
-            var displayName=o.client.action_manager.inner_action.display_name;
-            this.addBtn(displayName);
+        start:function(){
+            this.addBtn();
         },
-        addBtn:function(display_name){
+        addBtn:function(){
             var self=this;
-            if(display_name=="需求单"){
-                var timer=setInterval(function(){
-                    var btnParent=$('.oe_list_buttons');
-                    if(btnParent.length>0&&($('.oe_list_buttons button.need-search').length==0)){
-                        clearInterval(timer);
-                        var btn=$("<button class='need-search'>需求搜索</button>");
-                        btnParent.append(btn);
-                        btn.click(function(){
-                            self.popDialog();
-                        });
-                    }
-                },100)
-            }
+            var timer=setInterval(function(){
+                var btnParent=$('.oe_list_buttons');
+                if(btnParent.length>0&&($('.oe_list_buttons button.need-search').length==0)){
+                    clearInterval(timer);
+                    var btn=$("<button class='need-search'>需求搜索</button>");
+                    btnParent.append(btn);
+                    btn.click(function(){
+                        self.popDialog();
+                    });
+                }
+            },100)
         },
         popDialog:function(){
             //用来存储表单插件的校验状态
@@ -130,6 +127,14 @@ openerp.ccb_firewall=function(instance){
         }
     });
 
-    //当视图加载时调用自己指定代码
-    instance.web.actionList.push(new instance.ccb_firewall.Widget());
+    instance.web.View.include({
+        start:function(){
+            var self = this;
+            if(this.model == "ccb_firewall.needs"){
+                var ccb_firewall = new instance.ccb_firewall.Widget(self);
+                ccb_firewall.start();
+            }
+            return this._super.apply(this, arguments);
+        }
+    });
 }
